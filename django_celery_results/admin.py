@@ -10,9 +10,11 @@ except (AttributeError, KeyError):
     ALLOW_EDITS = False
     pass
 
+from django.contrib import admin
 from .models import GroupResult, TaskResult
 
 
+# @admin.register(TaskResult)
 class TaskResultAdmin(admin.ModelAdmin):
     """Admin-interface for results of tasks."""
 
@@ -65,16 +67,16 @@ class TaskResultAdmin(admin.ModelAdmin):
     def has_change_permission(self, request, obj=None):
         return False
 
-    def get_readonly_fields(self, request, obj=None):
-        if ALLOW_EDITS:
-            return self.readonly_fields
-        else:
-            return list({
-                field.name for field in self.opts.local_fields
-            })
+    # def get_readonly_fields(self, request, obj=None):
+    #     if ALLOW_EDITS:
+    #         return self.readonly_fields
+    #     else:
+    #         return list({
+    #             field.name for field in self.opts.local_fields
+    #         })
 
 
-admin.site.register(TaskResult, TaskResultAdmin)
+# admin.site.register(TaskResult, TaskResultAdmin)
 
 
 class GroupResultAdmin(admin.ModelAdmin):
