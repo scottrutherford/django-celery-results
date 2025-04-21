@@ -59,6 +59,12 @@ class TaskResultAdmin(admin.ModelAdmin):
         }),
     )
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
     def get_readonly_fields(self, request, obj=None):
         if ALLOW_EDITS:
             return self.readonly_fields
@@ -80,6 +86,12 @@ class GroupResultAdmin(admin.ModelAdmin):
     list_filter = ('date_done',)
     readonly_fields = ('date_created', 'date_done', 'result')
     search_fields = ('group_id',)
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
 
 
 admin.site.register(GroupResult, GroupResultAdmin)
